@@ -4,6 +4,9 @@ on:
   push:
     tags: [ 'v*' ]
 
+permissions:
+  contents: write
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -13,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Create Release and Upload APK
-        uses: ncipollo/release-action@v1
+        uses: softprops/action-gh-release@v1
         with:
-          tag: ${{ github.ref }}
+          tag_name: ${{ github.ref_name }}
           files: assets/app-release.apk
